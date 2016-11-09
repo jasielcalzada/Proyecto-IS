@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{%load staticfiles%}
+{%block content%}
+<div class = "container">
+	<div class="row">
+		<h2>Registro de estudiante </h2>
+		<form id="miForm" action="."  method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<input name="username" type = "text" id = "id_username" class="form-control" placeholder="username"><br>
+				<input name="password1" id="id_password1" type="password" class="form-control" placeholder= "new password"><br>
+				<input name="password2" id="id_password2" type="password" class="form-control" placeholder="confirm password"><br>
+				<input name="name" id="id_name" type="text" class="form-control" placeholder=name"><br>
+				<input name="mail" id="id_mail" type="email" class="form-control" placeholder="email"><br>
+				<input name="n_control" id="id_n_control" type="text" class="form-control" placeholder="n_control"><br>
+				<input name="materi" id="id_materi" type="text" class="form-control" placeholder="Materia" value="{{object.serie}}">
+
+
+				<input type="submit"   name="Register" class="btn btn-primary" value="send">
+				<input type="reset"  name="Cancel" class="btn btn-danger" value="clear"><br><br>
+
+			</form>
+	</div>
+</div>
+{%endblock%}

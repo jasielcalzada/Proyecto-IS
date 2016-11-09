@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{%load staticfiles%}
+{%block content%}
+<form method='POST'  class="col s12 m8 l12">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="input-field col s12 m12 l12">
+                <label for="icon_prefix">Materia</label>
+                <input id="icon_prefix" type="text" class="validate" name="materia">
+            </div>
+            <div class="input-field col s12 m12 l12">
+                <label for="icon_telephone">Serie</label>
+                <input id="icon_telephone" class="validate" type="text" name="serie">
+            </div>
+            <input type="hidden"  name="profesor" value="{{user.profile.name}}">
+            <button class="btn waves-effect waves-light col s12 m12 l12" type="submit" name="action">Agregar</button>
+        </div>
+    </div>
+</form>
+{%endblock%}

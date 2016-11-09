@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<br>
+<div class = "container">
+    <div class="row">
+        <center><h2>Agregue las respuestas</h2></center>
+        <form method='POST'  class="col s12 m8 l12" action="#">
+            {% csrf_token %}
+            <div class="input-field col s12 m12 l12">
+                <label for="icon_pre">Opcion</label>
+                <input id="icon_pre" type="text" class="validate" name="opcion">
+            </div>
+
+            <div class="input-field col s12 m12 l12" >
+                <select name="pregun">
+                    <option value="" disabled selected>Pregunta</option>
+                    {% for item in pre %}
+                    <option value="{{item.pregunta}}">{{item.pregunta}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <p class ="col s12 m12 l12">
+              <input type="checkbox" id="test5" class="validate" name="correct"/>
+              <label for="test5">Correcta</label>
+            </p>
+
+            <button class="btn waves-effect waves-light col s12 m12 l12" type="submit" name="action">Agregar</button>
+        </form>
+    </div>
+</div>
+<script>
+     $(document).ready(function() {
+         $('select').material_select();
+     });
+</script>
+<script>
+    $('select').material_select('destroy');
+</script>
+{% endblock %}

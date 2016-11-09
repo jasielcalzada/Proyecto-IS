@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<form method='POST'  class="col s12 m8 l12">
+    {% csrf_token %}
+        <div class="row">
+            <div class="col s12 m8 l9">
+                <div class="card-panel blue lighten-2" id="form_pregunta">
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <label for="icon_prefix">pregunta</label>
+                            <input id="icon_prefix" type="text" class="validate" name="pregunta">
+                        </div>
+
+
+                        <div class="input-field col s12 m12 l12">
+                            <select name="dificultad">
+                              <option value="" disabled selected>Dificultad</option>
+                              <option value="Facil"       >Facil</option>
+                              <option value="Intermedio"  >Intermedio</option>
+                              <option value="Dificil"     >Dificil</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field col s12 m12 l12" >
+                            <select name="valor">
+                                  <option value="" disabled selected>Valor</option>
+                                  <option value="1" >1</option>
+                                  <option value="2" >2</option>
+                                  <option value="3" >3</option>
+                                  <option value="4" >4</option>
+                                  <option value="5" >5</option>
+                            </select>
+                        </div>
+
+                        <!--
+                        <div class="input-field col s12 m12 l12">
+                            <label for="icon_pre">Opcion</label>
+                            <input id="icon_pre" type="text" class="validate" name="opcion">
+                        </div>
+
+                        <div class="input-field col s12 m12 l12">
+                            <label for="icon_pr">corecta</label>
+                            <input id="icon_pr" type="text" class="validate" name="corecta">
+                        </div>
+
+                        <div class="input-field col s12 m12 l12">
+                            <label for="icon_p">pregunta_c</label>
+                            <input id="icon_p" type="text" class="validate" name="pregun">
+                        </div>
+                        -->
+                        <input type="submit" value="Add" id= "Add">
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+<script>
+     $(document).ready(function() {
+         $('select').material_select();
+     });
+</script>
+{% endblock %}

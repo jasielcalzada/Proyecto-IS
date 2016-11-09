@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<form method='POST'  class="col s12 m8 l12">
+    {% csrf_token %}
+    <div class="input-field col s12 m12 l12">
+        <label for="icon_pre">Opcion</label>
+        <input id="icon_pre" type="text" class="validate" name="opcion">
+    </div>
+
+    <div class="input-field col s12 m12 l12">
+        <label for="icon_pr">corecta</label>
+        <input id="icon_pr" type="text" class="validate" name="corecta">
+    </div>
+
+    <!--<div class="input-field col s12 m12 l12">
+        <label for="icon_p">pregunta_c</label>
+        <input id="icon_p" type="text" class="validate" name="pregun">
+    </div>-->
+
+    <div class="input-field col s12 m12 l12" >
+        <select name="pregun">
+            <option value="" disabled selected>Pregunta</option>
+            {% for item in pre %}
+            <option value="{{item.id}}">{{item.pregunta}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <input type="submit" value="Add" id= "Add">
+</form>
+<script>
+     $(document).ready(function() {
+         $('select').material_select();
+     });
+</script>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<center><h1>Listado de materias de {{user.profile.name}}</h1></center>
+<center>
+    <div class="container">
+            <table class="responsive-table">
+                    <thead>
+                      <tr>
+                          <th data-field="serie ">Serie</th>
+                          <th data-field="materia">Materia</th>
+                          <th data-field="profesor">Profesor</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for materia in materias %}
+                    {% if materia.profesor = user.profile.name%}
+                      <tr>
+                            <td><a href="/detalle_materia/{{materia.serie}}">{{materia.serie}}</a></td>
+                            <td>{{materia.materia}}<br></td>
+                            <td>{{materia.profesor}}</td>
+                      </tr>
+                    {%endif%}
+                    {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+</center>
+
+    <div class="row">
+        <div class="col s12 m4 l12 push-l11">
+            <a class="btn-floating btn-large waves-effect waves-light red" href="/add_materia"><i class="material-icons">add</i></a>
+        </div>
+    </div>
+
+{% endblock %}

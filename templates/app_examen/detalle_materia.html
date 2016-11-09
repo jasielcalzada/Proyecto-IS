@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<!--<div class="container">
+    <li>Materia: {{object.materia}}</li>
+    <li>Serie:{{object.serie}}</li>
+    <li>profesor:{{object.profesor}}</li>
+</div>-->
+    <div class="row">
+      <div class="col s12 m4 l3"  id="r1"> <!-- Note that "m4 l3" was added -->
+                <ul>
+                    <li>
+                        <div class="userView">
+                              <a><span class="white-text">{{object.materia}}</span></a><br>
+                              <a><span class="white-text" name="campo" value="{{object.serie}}">{{object.serie}}</span></a><br>
+                              <a><span class="white-text">{{object.profesor}}</span></a><br>
+                              <!--<a href="/signup_a"><span class="white-text">Agregar alumno</span></a>-->
+                        </div>
+                    </li>
+                    <li><a href="#!">Second Link</a></li>
+                    <li><div class="divider"></div></li>
+                </ul>
+      </div>
+      <div class="col s12 m8 l9" id="r2"> <!-- Note that "m8 l9" was added -->
+
+          <form method="POST" action="{% url 'signup_a' %}">
+                {% csrf_token %}
+                <input name="username" type = "hidden" id = "id_username" class="form-control" placeholder="username"><br>
+				<input name="password1" id="id_password1" type="hidden" class="form-control" placeholder= "new password" value=123><br>
+				<input name="password2" id="id_password2" type="hidden" class="form-control" placeholder="confirm password" value=123><br>
+				<!--<input name="name" id="id_name" type="text" class="form-control" placeholder="Nombre"><br>
+				<input name="mail" id="id_mail" type="email" class="form-control" placeholder="Correo"><br>-->
+				<input name="n_control" id="id_n_control" type="text" class="form-control" placeholder="No control" ><br>
+				<input name="materi" id="id_materi" type="hidden" class="form-control" placeholder="Materia" value="{{object.serie}}"><br>
+
+
+				<input type="submit"   name="Register" class="btn btn-primary" value="send" onclick="copia()">
+				<input type="reset"  name="Cancel" class="btn btn-danger" value="clear"><br><br>
+          </form>
+
+          <table class="responsive-table">
+                <thead>
+                  <tr>
+                      <th data-field="">Numero de control</th>
+                      <th data-field="">Nombre</th>
+                      <th data-field="">Correo</th>
+                      <th data-field="">Materia</th>
+                  </tr>
+                </thead>
+
+            <tbody>
+            {% for alumno in alumnos %}
+                {%if alumno.materi == object.serie%}
+                  <tr>
+                        <td>{{alumno.n_control}}</td>
+                        <td>{{alumno.name}}</td>
+                        <td>{{alumno.mail}}</td>
+                        <td>{{alumno.materi}}</td>
+                  </tr>
+                {%endif%}
+            {% endfor %}
+            </tbody>
+      </table>
+
+
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+    <script language="javascript" type="text/javascript">
+       function copia(){
+            document.getElementById("id_username").value=document.getElementById("id_n_control").value
+       }
+    </script>
+{% endblock %}
+
+
+
+

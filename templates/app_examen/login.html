@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<html>
+    <body id="body-login">
+        <div class="container">
+                <br>
+            <center>
+                <div class="card-panel white lighten-2" id="forma-login">
+                    <div class="row">
+                        <form method='POST'>
+                            {% csrf_token %}
+                            <div class="row">
+
+                                    <div class="input-field col s12 m12 l12">
+                                        <label for="icon_prefix">Username</label>
+                                        <input id="icon_prefix" type="text" class="validate" name="username">
+                                    </div>
+
+
+
+                                    <div class="input-field col s12 m12 l12">
+                                        <label for="icon_telephone">Password</label>
+                                        <input id="icon_telephone" class="validate" type="password" name="password">
+                                    </div>
+
+
+                                    <input type="submit" value="Login" id= "login" >
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </center>
+        </div>
+    </body>
+</html>
+{% endblock %}
