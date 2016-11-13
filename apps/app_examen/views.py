@@ -3,7 +3,7 @@ from django.views.generic import FormView, CreateView, ListView,DetailView,Updat
 from .forms import UserForm, UserFormAlumno, respuestas_form,Preguntas_form
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
-from .models import Profesor,Materia,Alumno,Preguntas,Respuesta
+from .models import Profesor,Materia,Alumno,Preguntas,Respuesta,examen
 from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 from django.contrib.auth.models import User
 
@@ -107,4 +107,17 @@ class detalle_materia(DetailView):
         ctx['alumnos'] = Alumno.objects.all()
         #ctx['materia'] = Materia.objects.all()
         return ctx
+
+
+class Examen_view(CreateView):
+    template_name = 'app_examen/generador_examen.html'
+    model = examen
+    fields = ['materia','profesor','alumno','unidad','pregunta','respuesta']
+    success_url = reverse_lazy('index_view')
+
+    def get_context_data(self, **kwargs):
+        ctx = super(Examen_view,self).get_context_data(**kwargs)
+        ctx['preguntas'] = Respuesta.objects.all()
+        return ctx
+
 

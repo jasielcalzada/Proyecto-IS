@@ -14,7 +14,8 @@
                               <a><span class="white-text">{{object.materia}}</span></a><br>
                               <a><span class="white-text" name="campo" value="{{object.serie}}">{{object.serie}}</span></a><br>
                               <a><span class="white-text">{{object.profesor}}</span></a><br>
-                              <!--<a href="/signup_a"><span class="white-text">Agregar alumno</span></a>-->
+                              <a href="/Examen_view" id="boton-guardar"><span class="white-text">Crear Examen</span></a>
+                              <input type="hidden" id="p" value="{{object.profesor}}">
                         </div>
                     </li>
                     <li><a href="#!">Second Link</a></li>
@@ -24,6 +25,7 @@
       <div class="col s12 m8 l9" id="r2"> <!-- Note that "m8 l9" was added -->
 
           <form method="POST" action="{% url 'signup_a' %}">
+                <h2>Agrega un alumno</h2>
                 {% csrf_token %}
                 <input name="username" type = "hidden" id = "id_username" class="form-control" placeholder="username"><br>
 				<input name="password1" id="id_password1" type="hidden" class="form-control" placeholder= "new password" value=123><br>
@@ -34,10 +36,10 @@
 				<input name="materi" id="id_materi" type="hidden" class="form-control" placeholder="Materia" value="{{object.serie}}"><br>
 
 
-				<input type="submit"   name="Register" class="btn btn-primary" value="send" onclick="copia()">
+				<input type="submit"   name="Register" class="btn btn-primary" value="send" >
 				<input type="reset"  name="Cancel" class="btn btn-danger" value="clear"><br><br>
           </form>
-
+<div id="Layer1" style="width:1000px; height:400px; overflow-y: scroll;">
           <table class="responsive-table">
                 <thead>
                   <tr>
@@ -49,20 +51,22 @@
                 </thead>
 
             <tbody>
-            {% for alumno in alumnos %}
-                {%if alumno.materi == object.serie%}
-                  <tr>
-                        <td>{{alumno.n_control}}</td>
-                        <td>{{alumno.name}}</td>
-                        <td>{{alumno.mail}}</td>
-                        <td>{{alumno.materi}}</td>
-                  </tr>
-                {%endif%}
-            {% endfor %}
+                    {% for alumno in alumnos %}
+                        {%if alumno.materi == object.serie%}
+                          <tr>
+                                <td>{{alumno.n_control}}</td>
+                                <td>{{alumno.name}}</td>
+                                <td>{{alumno.mail}}</td>
+                                <td>{{alumno.materi}}</td>
+                          </tr>
+                        {%endif%}
+                    {% endfor %}
+
             </tbody>
+
       </table>
 
-
+    </div>
 
       </div>
 
@@ -75,9 +79,37 @@
 
 
     <script language="javascript" type="text/javascript">
-       function copia(){
+       /*function copia(){
             document.getElementById("id_username").value=document.getElementById("id_n_control").value
-       }
+       }*/
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $('#boton-guardar').click(function(){
+
+
+                /*Captura de datos escrito en los inputs*/
+                var user = document.getElementById("id_username").value;
+                var nctrol = document.getElementById("id_n_control").value;
+                var mate = document.getElementById("id_materi").value;
+                var pro = document.getElementById("p").value;
+
+
+                /*Guardando los datos en el LocalStorage*/
+                localStorage.setItem("Username", user);
+                localStorage.setItem("Ncontrol", nctrol);
+                localStorage.setItem("Materia", mate);
+                localStorage.setItem("Profesor", pro);
+
+
+                /*Limpiando los campos o inputs*/
+                /*document.getElementById("nombretxt").value = "";
+                document.getElementById("apellidotxt").value = "";
+                document.getElementById("telefonotxt").value = "";
+                document.getElementById("correotxt").value = "";*/
+             });
+        });
     </script>
 {% endblock %}
 

@@ -12,7 +12,9 @@ class Materia(models.Model):
     profesor = models.CharField(max_length=64,null=True)
 
     def __unicode__(self):
-        return '%s %s %s'%(self.materia,self.serie,self.profesor)
+        return '%s'%(self.serie)
+    def __str__(self):
+        return self.serie
 
 class Profesor(models.Model):
     user_perfil = models.OneToOneField(User, related_name="profile")
@@ -29,11 +31,11 @@ class Alumno(models.Model):
     mail = models.EmailField(null=True,blank=True,default="correo@correo")
     name = models.CharField(max_length=64,null=True,blank=True,default="Alumno#")
     n_control = models.SlugField(max_length=64,primary_key=True,null=False)
-    materi = models.CharField(max_length=64)
+    materi = models.CharField(max_length=100)
     categoria = models.CharField(max_length=64,null=True,default="alumno")
 
     def __unicode__(self):
-        return '%s'%(self.user_perfil)
+        return '%s'%(self.n_control)
 
 
 #NO USAR ESTE
@@ -56,7 +58,7 @@ class Respuesta(models.Model):
     pregun  = models.ForeignKey(Preguntas,null=True, blank=True, default=None)
 
     def __unicode__(self):
-        return '%s %s %s'%(self.opcion,self.correct,self.pregun.pregunta)
+        return self.opcion
 
 #class Examen(models.Model):
 #    materia = models.ForeignKey(Materia,null=True,on_delete=models.CASCADE,db_index=True)
@@ -68,6 +70,17 @@ class Respuesta(models.Model):
 #    def __unicode__(self):
 #        return '%s %s %s %d %s %s'%(self.materia,self.profesor.name,self.alumno.name,self.unidad,self.pregun,self.respue)
 
+class examen(models.Model):
+    materia = models.ForeignKey(Materia)
+    profesor = models.ForeignKey(Profesor)
+    alumno = models.ForeignKey(Alumno)
+    unidad = models.IntegerField()
+    pregunta = models.ForeignKey(Preguntas,null=True)
+    respuesta = models.ForeignKey(Respuesta,null=True)
+    def __unicode__(self):
+        return '%s %s %s %d %s %s'%(self.materia,self.profesor,self.alumno,self.unidad,self.pregunta,self.respuesta)
+    def __str__(self):
+        return self.materia,self.profesor,self.alumno,self.unidad,self.pregunta,self.respuesta
 
 class extra(models.Model):
     a = models.IntegerField()

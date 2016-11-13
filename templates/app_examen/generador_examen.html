@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+    <h2>Cree el examen</h2>
+    <div class="row">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <input name="materia" id="idmateria" type="text" class="form-control" placeholder="materia"><br>
+            <input name="profesor" id="idprofesor" type="text" class="form-control" placeholder="profesor"><br>
+            <input name="alumno" id="id_alumno" type="text" class="form-control" placeholder="alumno"><br>
+            <input name="unidad" id="id_unidad" type="number" class="form-control" placeholder="unidad"><br>
+            <input name="pregunta" id="id_pregunta" type="text" class="form-control" placeholder="pregunta"><br>
+            <input name="respuesta" id="id_respuesta" type="text" class="form-control" placeholder="respuesta"><br>
+
+            <input type="submit"   name="Register" class="btn btn-primary" value="send">
+
+            <input type="reset"  name="Cancel" class="btn btn-danger" value="clear"><br><br>
+        </form>
+         <button class="button icon-right ion-ios7-checkmark-outline button-block button-balanced" id="boton-cargar">
+                        Cargarclea
+                    </button>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#boton-cargar').click(function(){
+
+            /*Obtener datos almacenados*/
+            var materi = localStorage.getItem("Materia");
+            var profe = localStorage.getItem("Profesor");
+
+            console.log(materi);
+            console.log(profe);
+
+            /*Mostrar datos almacenados*/
+            /*document.getElementById("idmateria").innerHTML = materi;
+            document.getElementById("idprofesor").innerHTML = profe;*/
+            document.getElementById("idmateria").value = materi;
+            document.getElementById("idprofesor").value = profe;
+        });
+    });
+
+</script>
+{% endblock %}
